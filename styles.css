@@ -16,6 +16,7 @@ main {
 }
 
 main > div > img {
+    margin-bottom: 10px;
     width: 655px;
     height: 395px;
     background: black;
