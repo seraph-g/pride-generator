@@ -33,6 +33,7 @@ $(function() {
         "Genderfluid": "genderfluid.png",
         "8-Stripe": "8stripe.png",
         "Agender": "agender.png",
+        "Asexual": "asexual.png",
     }
     for (var item in flagList) {
         element = `<div><p>${item}</p><img src='flags/${flagList[item]}'>`
