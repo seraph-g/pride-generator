@@ -37,7 +37,7 @@ $(function() {
     for (var item in flagList) {
         element = `<div><p>${item}</p><img src='flags/${flagList[item]}'>`
             + `<input id='${item}Name' name='${item}' value='flags/${flagList[item]}'></input>`
-            + `<select id='${item}Mode' class='mode ${item}' name='${item}Mode'>`;
+            + `<div class='drops'><select id='${item}Mode' class='mode ${item}' name='${item}Mode'>`;
         for (var mode in modeList) {
             element += `<option value='${modeList[mode]}'>` +
                 `${toTitleCase(modeList[mode].replace('_', ' '))}</option>`;
@@ -51,7 +51,7 @@ $(function() {
             }
             element += `<option value='${order}'>${order}</option>`;
         }
-        element += "</select></div>";
+        element += "</select></div></div>";
         $("form").append(element);
     }
 
