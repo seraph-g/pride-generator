@@ -31,9 +31,10 @@ $(function() {
         "Pan": "pan.png",
         "Nonbinary": "nonbinary.png",
         "Genderfluid": "genderfluid.png",
-        "8-Stripe": "8stripe.png",
+        "8 Stripe": "8stripe.png",
         "Agender": "agender.png",
         "Asexual": "asexual.png",
+        "Aromantic": "aromantic.png",
     }
     for (var item in flagList) {
         element = `<div><p>${item}</p><img src='flags/${flagList[item]}'>`

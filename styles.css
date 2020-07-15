@@ -46,7 +46,7 @@ form {
     text-align: center;
     margin: 8px;
     padding-bottom: 10px;
-    overflow-y: scroll;
+    overflow-y: auto;
     flex-basis: auto;
     flex-grow: 1;
     flex-shrink: 1;
