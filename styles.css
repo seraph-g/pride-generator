@@ -58,7 +58,7 @@ form {
     grid-gap: 20px;
     text-align: center;
     margin: 8px;
-    padding: 0 20px 10px 20px;
+    padding: 10px 20px 10px 20px;
     overflow-y: visible;
     overflow-x: hidden;
     flex-basis: auto;
@@ -69,7 +69,7 @@ form {
 
 form > div {
     width: 170px;
-    height: 155px;
+    height: auto;
     background: lightgrey;
     border-radius: 5px;
 }
@@ -100,17 +100,6 @@ h1 {
     align-items: center;
 }
 
-/*
-
-@media only screen and (max-width: 768px) {
-    form {
-        width: 100%;
-        grid-template: 1fr 1fr / 1fr;
-        grid-auto-flow: column;
-        overflow-x: auto;
-    }
-}*/
-
 @media only screen and (max-width: 768px) {
 
 
@@ -132,13 +121,19 @@ h1 {
     form {
         width: 100%;
         height: auto;
-        grid-template: 155px 155px / 1fr;
+        grid-template: auto auto / 1fr;
         grid-auto-flow: column;
         overflow: auto;
-        padding: 0 0 5px 0;
+        overflow-y: hidden;
+        padding: 0 0 7px 0;
         flex-grow: 0;
         flex-shrink: 0;
         grid-gap: 10px;
+    }
+
+    form > div {
+        height: auto;
+        overflow: visible;
     }
 
     menu {
