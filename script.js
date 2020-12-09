@@ -35,6 +35,8 @@ $(function() {
         "Agender": "agender.png",
         "Asexual": "asexual.png",
         "Aromantic": "aromantic.png",
+        "Trixic": "trixic.png",
+        "Toric": "toric.png",
     }
     for (var item in flagList) {
         element = `<div><p>${item}</p><img src='flags/${flagList[item]}'>`

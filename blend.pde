@@ -1,7 +1,8 @@
 /* @pjs preload="flags/bi.png, flags/trans.png", "flags/genderqueer.png",
 "flags/lesbian.png", "flags/pan.png", "flags/gay.png", "flags/nonbinary.png",
 "flags/genderfluid.png", "flags/8stripe.png", "flags/agender.png",
-"flags/asexual.png", "flags/aromantic.png"; */
+"flags/asexual.png", "flags/aromantic.png",
+"flags/trixic.png", "flags/toric.png"; */
 
 
 ArrayList flags;
