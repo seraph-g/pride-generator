@@ -42,16 +42,6 @@ void draw() {
         }
     }
     image(img, 0, 0);
-    /*
-    PImage img = loadImage("bi.jpg");
-    PImage img2 = loadImage("trans.jpg");
-    PImage img3 = loadImage("genderqueer.jpg");
-    PImage img4 = loadImage("lesbian.png");
-    img.blend(img2, 0, 0, 655, 395, 0, 0, 655, 395, MULTIPLY);
-    img.blend(img3, 0, 0, 655, 395, 0, 0, 655, 395, OVERLAY);
-    img.blend(img4, 0, 0, 655, 395, 300, 0, 655, 395, ADD);
-    image(img, 0, 0);
-    */
 }
 
 class Flag {
