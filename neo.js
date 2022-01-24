@@ -60,7 +60,8 @@ function removeFromList(value) {
 
 function addToList(item) {
 
-    element = `<div><p>${item}</p><img src='flags/${flagList[item]}'>`
+    element = `<div>`
+        + `<p>${item}</p><img src='flags/${flagList[item]}'>`
         + `<input id='${item}Name' name='${item}' value='flags/${flagList[item]}'></input>`
         + `<select id='${item}Mode' class='mode ${item}' name='${item}Mode'>`
         for (var mode in modeList) {

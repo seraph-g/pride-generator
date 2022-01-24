@@ -16,9 +16,13 @@ html {
 main {
     display: flex;
     flex-direction: column;
+    flex: 1;
     align-items: center;
     overflow: hidden;
     height: 100vh;
+    flex-basis: auto;
+    display: grid;
+    grid-template: repeat(3, 1fr) / auto;
 }
 
 #main {
@@ -26,12 +30,30 @@ main {
 }
 
 main > div {
-    flex-basis: auto;
-    flex-grow: 0;
+    /* flex-basis: auto;
+    flex-grow: 0; */
     display: flex;
     align-items: center;
-    flex-shrink: 1;
-    min-height: 100px;
+    /* flex-shrink: 1; */
+    height: 100%;
+    width: 100%;
+    border: 2px solid lavender;
+    border-radius: 10px;
+    overflow: hidden;
+    flex-direction: column;
+    background: #e9cccc;
+}
+
+main > :first-child {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-top: none;
+}
+
+main > :last-child {    
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom: none;
 }
 
 main > div > img {
@@ -44,39 +66,20 @@ main > div > img {
     margin: 0 auto;
 }
 
-#library {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    overflow-y: auto;
-    overflow-x: hidden;
-    flex-grow: 1;
-    flex-shrink: 1;
-    padding: 0;
-    margin: 0;
-    width: 780px;
-    width: 100%;
-    overflow-x: scroll;
-}
-
 form {
-    display: grid;
-    /* grid-template: 155px / repeat(4, auto);
-    grid-auto-rows: 155px; */
+    display: flex;
     text-align: center;
-    margin: 8px 0px;
-    height: 33vh;
     overflow-y: scroll;
     overflow-x: hidden;
     flex-basis: auto;
+    flex-direction: column;
     align-items: center;
     width: 100%;
-    grid-template: auto / 1fr;
-    grid-auto-flow: row;
-    padding: 0 0 7px 0;
-    flex-grow: 0;
-    flex-shrink: 0;
-    grid-gap: 10px;
+    gap: 5px;
+}
+
+#result form {
+    flex-direction: column-reverse;
 }
 
 form > div {
@@ -89,21 +92,32 @@ form > div {
     justify-content: space-between;
     height: auto;
     overflow: visible;
-    /* background-image: url('flags/lesbian.png');
-    background-size: contain; */
+
+    display: grid;
+    grid-template: auto / 30% 100px 1fr 10%;
+    grid-template-areas: '. img img button';
+}
+
+#library form img {
+    grid-area: img;
 }
 
 form img {
-    width: 100px;
+    width: 100%;
+    height: 60px;
 }
 
 form p {
-    width: 25%;
-    margin: 3px;
+    width: 100%;
 }
 
 form input {
     display: none;
+}
+
+form button {
+    grid-area: button;
+    width: 100%;
 }
 
 h1 {
@@ -124,15 +138,4 @@ h2 {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-}
-
-#result {
-    background: grey;
-    height: 33vh;
-    width: 100%;
-}
-
-#result form {
-    display: flex;
-    flex-direction: column-reverse;
 }
