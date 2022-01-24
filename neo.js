@@ -15,6 +15,7 @@ const flagList = {
     "Trixic": "trixic.png",
     "Toric": "toric.png",
 };
+var index = 0;
 
 function draw_thing(flags) {
     clearInterval(tId);
@@ -39,8 +40,8 @@ function toTitleCase(str) {
 }
 
 function lockBase() {
-    $($("#result form div select option[value='BASE']")[0]).prop("selected", true);
-    $($("#result form div select")[0]).prop('disabled', true);
+    $($("#active form div select option[value='BASE']")[0]).prop("selected", true);
+    $($("#active form div select")[0]).prop('disabled', true);
 }
 
 function checkMode(element) {
@@ -54,13 +55,32 @@ function checkMode(element) {
 }
 
 function removeFromList(value) {
-    $(value).parent().remove();
+    $(value).remove();
+    onUpdate();
+}
+
+function moveDown(value) {
+    itemDiv = $(value);
+    prevDiv = $(value).prev();
+    itemDiv.insertBefore(itemDiv.prev());
+    if ($(`#${prevDiv.attr('id')} select option[value='BASE']`).prop("selected")) {
+        $(`#${prevDiv.attr('id')} select option[value='OVERLAY']`).prop("selected", true);
+    }
+    onUpdate();
+}
+
+function moveUp(value) {
+    itemDiv = $(value);
+    itemDiv.insertAfter(itemDiv.next());
+    if ($(`${value} select option[value='BASE']`).prop("selected")) {
+        $(`${value} select option[value='OVERLAY']`).prop("selected", true);
+    }
     onUpdate();
 }
 
 function addToList(item) {
 
-    element = `<div>`
+    element = `<div id='a${index}'><div><button class="up_button" type="button">⇧</button><button class="down_button" type="button">⇩</button></div>`
         + `<p>${item}</p><img src='flags/${flagList[item]}'>`
         + `<input id='${item}Name' name='${item}' value='flags/${flagList[item]}'></input>`
         + `<select id='${item}Mode' class='mode ${item}' name='${item}Mode'>`
@@ -76,22 +96,31 @@ function addToList(item) {
                 `${toTitleCase(modeList[mode].replace('_', ' '))}</option>`;
         }
     element += "</select>";
-    element += `<button type="button" id='${item}Off' class='mode ${item}' name='${item}On'>-</button>`;
+    element += `<button type="button" id='${item}Off' class='remove_button ${item}' name='${item}On'>-</button>`;
     element += "</div>"
-    $("#result form").append(element);
+
+    $("#active form").append(element);
 
     $.each($("select"), function(index, value) {
         value.addEventListener("input", onUpdate);
     });
 
-    $.each($("#result form button"), function(index, value) {
-        value.addEventListener("click", function () {
-            removeFromList(value);
-        });
+    item = `#a${index}`
+    $(`${item} .remove_button`).click(function(i) {
+        removeFromList(item);
+    });
+
+    $(`${item} .up_button`).click(function() {
+        moveUp(item);
+    });
+
+    $(`${item} .down_button`).click(function() {
+        moveDown(item);
     });
 
     onUpdate();
     lockBase();
+    index += 1;
 }
 
 function onUpdate() {
@@ -99,7 +128,7 @@ function onUpdate() {
         $(value).prop("disabled", false);
     });
     var flags = []
-    var formArray = $("#result form").serializeArray();
+    var formArray = $("#active form").serializeArray();
     flags = [];
     for (i=0; i<formArray.length/2; i++) {
         flags.push({name: formArray[i*2+0].value,

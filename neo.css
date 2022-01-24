@@ -50,7 +50,7 @@ main > :first-child {
     border-top: none;
 }
 
-main > :last-child {    
+main > :last-child {
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
     border-bottom: none;
@@ -78,7 +78,7 @@ form {
     gap: 5px;
 }
 
-#result form {
+#active form {
     flex-direction: column-reverse;
 }
 
@@ -94,12 +94,27 @@ form > div {
     overflow: visible;
 
     display: grid;
-    grid-template: auto / 30% 100px 1fr 10%;
-    grid-template-areas: '. img img button';
+    grid-template: 'text text img img button' 1fr / 10% 25% 100px 1fr 10%;
 }
 
 #library form img {
     grid-area: img;
+}
+
+#library form p {
+    grid-area: text;
+}
+
+#active div > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#active div > div button {
+    width: 100%;
+    height: 100%;
 }
 
 form img {
@@ -115,7 +130,7 @@ form input {
     display: none;
 }
 
-form button {
+form > button {
     grid-area: button;
     width: 100%;
 }
