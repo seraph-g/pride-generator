@@ -89,7 +89,7 @@ form > div {
     overflow: visible;
     display: grid;
     grid-template: 'text text img img . button' 1fr /
-        10% 36% minmax(0px, 100px) 0.75fr 5px minmax(20px, 10%);
+        10% 35% minmax(0px, 100px) 0.95fr 5px minmax(20px, 10%);
 }
 
 form > div:nth-child(2n+1) {
@@ -163,11 +163,11 @@ h2 {
     align-items: center;
 }
 
-@media screen and ((min-width: 600px) or (orientation: landscape)) {
+@media screen and ((min-width: 600px) ) {
     main {
         grid-template: 'display library' 1fr
                        'active library'  1fr /
-                       auto 30%;
+                       auto 40%;
         max-width: 800px;
         margin: 0 auto;
     }
