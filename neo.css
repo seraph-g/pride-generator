@@ -14,13 +14,8 @@ html {
 }
 
 main {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    align-items: center;
     overflow: hidden;
     height: 100.01vh;
-    flex-basis: auto;
     display: grid;
     grid-template: repeat(3, 1fr) / auto;
 }
@@ -67,7 +62,7 @@ main > :last-child {
 form {
     display: flex;
     text-align: center;
-    overflow-y: scroll;
+    overflow-y: auto;
     overflow-x: hidden;
     flex-basis: auto;
     flex-direction: column;
@@ -95,9 +90,9 @@ form > div {
     justify-content: space-between;
     height: auto;
     overflow: visible;
-
     display: grid;
-    grid-template: 'text text img img button' 1fr / 10% 25% 100px 1fr 10%;
+    grid-template: 'text text img img . button' 1fr /
+        10% 36% minmax(0px, 100px) 0.75fr 5px minmax(20px, 10%);
 }
 
 #library form img {
@@ -106,6 +101,10 @@ form > div {
 
 #library form p {
     grid-area: text;
+}
+
+form button {
+    grid-area: button;
 }
 
 #active div > div {
@@ -157,4 +156,26 @@ h2 {
     flex-direction: row;
     justify-content: center;
     align-items: center;
+}
+
+@media screen and (min-width: 768px) {
+    main {
+        grid-template: 'library display' 1fr
+                       'library active'  1fr /
+                       30% auto;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    #library {
+        grid-area: library;
+    }
+
+    main > div {
+        border-radius: 0px;
+    }
+
+    form > div {
+        /* grid-template: 'text text img img button' 1fr / 10% 25% 100px 0.75fr 10%; */
+    }
 }
