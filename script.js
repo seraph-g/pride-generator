@@ -1,3 +1,22 @@
+const modeList = ["BASE", "ADD", "SUBTRACT", "DARKEST", "LIGHTEST", "DIFFERENCE", "EXCLUSION", "MULTIPLY", "SCREEN", "OVERLAY", "HARD_LIGHT", "SOFT_LIGHT", "DODGE", "BURN"];
+const flagList = {
+    "Lesbian": "lesbian.png",
+    "Gay": "gay.png",
+    "Bi": "bi.png",
+    "Trans": "trans.png",
+    "Genderqueer": "genderqueer.png",
+    "Pan": "pan.png",
+    "Nonbinary": "nonbinary.png",
+    "Genderfluid": "genderfluid.png",
+    "8 Stripe": "8stripe.png",
+    "Agender": "agender.png",
+    "Asexual": "asexual.png",
+    "Aromantic": "aromantic.png",
+    "Trixic": "trixic.png",
+    "Toric": "toric.png",
+};
+var index = 0;
+
 function draw_thing(flags) {
     clearInterval(tId);
 
@@ -20,100 +39,147 @@ function toTitleCase(str) {
     );
 }
 
-$(function() {
-    const modeList = ["DISABLED", "BASE", "ADD", "SUBTRACT", "DARKEST", "LIGHTEST", "DIFFERENCE", "EXCLUSION", "MULTIPLY", "SCREEN", "OVERLAY", "HARD_LIGHT", "SOFT_LIGHT", "DODGE", "BURN"]
-    const flagList = {
-        "Lesbian": "lesbian.png",
-        "Gay": "gay.png",
-        "Bi": "bi.png",
-        "Trans": "trans.png",
-        "Genderqueer": "genderqueer.png",
-        "Pan": "pan.png",
-        "Nonbinary": "nonbinary.png",
-        "Genderfluid": "genderfluid.png",
-        "8 Stripe": "8stripe.png",
-        "Agender": "agender.png",
-        "Asexual": "asexual.png",
-        "Aromantic": "aromantic.png",
-        "Trixic": "trixic.png",
-        "Toric": "toric.png",
+function lockBase() {
+    $($("#active form div select option[value='BASE']")[0]).prop("selected", true);
+    $($("#active form div select")[0]).prop('disabled', true);
+}
+
+function checkMode(element) {
+    val = $(element).val();
+    elemClass = $(element).attr("class").replace('mode ', '');
+    if (val == "DISABLED" || val == "BASE") {
+        $orderElem = $(".order." + elemClass);
+        $orderElem.prop("disabled", true);
+        $orderElem.val("None");
     }
+}
+
+function removeFromList(value) {
+    $(value).remove();
+    onUpdate();
+}
+
+function moveDown(value) {
+    itemDiv = $(value);
+    prevDiv = $(value).prev();
+    itemDiv.insertBefore(itemDiv.prev());
+    if ($(`#${prevDiv.attr('id')} select option[value='BASE']`).prop("selected")) {
+        $(`#${prevDiv.attr('id')} select option[value='OVERLAY']`).prop("selected", true);
+    }
+    onUpdate();
+}
+
+function moveUp(value) {
+    itemDiv = $(value);
+    itemDiv.insertAfter(itemDiv.next());
+    if ($(`${value} select option[value='BASE']`).prop("selected")) {
+        $(`${value} select option[value='OVERLAY']`).prop("selected", true);
+    }
+    onUpdate();
+}
+
+function addToList(item) {
+
+    element = `<div id='a${index}'><div><button class="up_button" type="button">⇧</button><button class="down_button" type="button">⇩</button></div>`
+        + `<p>${item}</p><img src='flags/${flagList[item]}'>`
+        + `<input id='${item}Name' name='${item}' value='flags/${flagList[item]}'></input>`
+        + `<select id='${item}Mode' class='mode ${item}' name='${item}Mode'>`
+        for (var mode in modeList) {
+            extra = ''
+            if (modeList[mode] == 'BASE') {
+                extra += ' hidden';
+            }
+            else if (modeList[mode] == 'OVERLAY') {
+                extra += ' selected'
+            }
+            element += `<option ${extra} value='${modeList[mode]}'>` +
+                `${toTitleCase(modeList[mode].replace('_', ' '))}</option>`;
+        }
+    element += "</select>";
+    element += `<button type="button" id='${item}Off' class='remove_button ${item}' name='${item}On'>-</button>`;
+    element += "</div>"
+
+    $("#active form").append(element);
+
+    $.each($("select"), function(index, value) {
+        value.addEventListener("input", onUpdate);
+    });
+
+    item = `#a${index}`
+    $(`${item} .remove_button`).click(function(i) {
+        removeFromList(item);
+    });
+
+    $(`${item} .up_button`).click(function() {
+        moveUp(item);
+    });
+
+    $(`${item} .down_button`).click(function() {
+        moveDown(item);
+    });
+
+    onUpdate();
+    lockBase();
+    index += 1;
+}
+
+function onUpdate() {
+    $.each($("select"), function(index, value) {
+        $(value).prop("disabled", false);
+    });
+    var flags = []
+    var formArray = $("#active form").serializeArray();
+    flags = [];
+    for (i=0; i<formArray.length/2; i++) {
+        flags.push({name: formArray[i*2+0].value,
+            mode: formArray[i*2+1].value});
+    }
+    console.log(flags);
+    lockBase();
+    draw_thing(flags);
+    // $.each($(".mode"), function(index, value) {
+    //     checkMode(value);
+    // });
+    /*
+    $.each(formArray, function(index, value) {
+        if (value.value == "Base") {
+            flags.push
+        }
+    });*/
+}
+
+$(function() {
+
     for (var item in flagList) {
         element = `<div><p>${item}</p><img src='flags/${flagList[item]}'>`
             + `<input id='${item}Name' name='${item}' value='flags/${flagList[item]}'></input>`
-            + `<div class='drops'><select id='${item}Mode' class='mode ${item}' name='${item}Mode'>`;
-        for (var mode in modeList) {
-            element += `<option value='${modeList[mode]}'>` +
-                `${toTitleCase(modeList[mode].replace('_', ' '))}</option>`;
-        }
-        element += `</select><select id='${item}Order 'class='order ${item}' name='${item}Order'>` +
-            "<option value='None'>None</option>"
-        for (i=1; i<Object.keys(flagList).length; i++) {
-            order = i;
-            if (i==0) {
-                order = "Base";
-            }
-            element += `<option value='${order}'>${order}</option>`;
-        }
-        element += "</select></div></div>";
-        $("form").append(element);
+            + `<button type="button" id='${item}On' class='mode ${item}' name='${item}'>+</button>`;
+        // for (var mode in modeList) {
+        //     element += `<option value='${modeList[mode]}'>` +
+        //         `${toTitleCase(modeList[mode].replace('_', ' '))}</option>`;
+        // }
+        // element += `</select><select id='${item}Order 'class='order ${item}' name='${item}Order'>` +
+        //     "<option value='None'>None</option>"
+        // for (i=1; i<Object.keys(flagList).length; i++) {
+        //     order = i;
+        //     if (i==0) {
+        //         order = "Base";
+        //     }
+        //     element += `<option value='${order}'>${order}</option>`;
+        // }
+        element += "</div>";
+        $("#library form").append(element);
     }
 
-    var modes = $(".mode");
-    var selects = $("select");
-
-    function onUpdate() {
-        $.each(selects, function(index, value) {
-            $(value).prop("disabled", false);
+    $.each($("#library form button"), function(index, value) {
+        value.addEventListener("click", function () {
+            addToList(value.name);
         });
-        var flags = []
-        var formArray = $("form").serializeArray();
-        var newArray = [];
-        flags = [];
-        for (i=0; i<formArray.length/3; i++) {
-            newArray.push({file: formArray[i*3+0].value,
-                mode: formArray[i*3+1].value,
-                order: formArray[i*3+2].value});
-        }
-        console.log(newArray);
-        for (i=0; i<newArray.length; i++) {
-            for (var flag in newArray) {
-                if ((i==0 && newArray[flag].mode=="BASE") ||
-                    (i==newArray[flag].order)) {
-                        flags.push({name: newArray[flag].file,
-                            mode: newArray[flag].mode});
-                        break;
-                }
-            }
-        }
-        draw_thing(flags);
-        $.each(modes, function(index, value) {
-            checkMode(value);
-        });
-        /*
-        $.each(formArray, function(index, value) {
-            if (value.value == "Base") {
-                flags.push
-            }
-        });*/
-    }
-
-    function checkMode(element) {
-        val = $(element).val();
-        elemClass = $(element).attr("class").replace('mode ', '');
-        if (val == "DISABLED" || val == "BASE") {
-            $orderElem = $(".order." + elemClass);
-            $orderElem.prop("disabled", true);
-            $orderElem.val("None");
-        }
-    }
-
-    $.each(modes, function(index, value) {
-        value.addEventListener("input", function() { checkMode(value) });
     });
-    $.each(selects, function(index, value) {
-        value.addEventListener("input", onUpdate);
-    });
+
+
+
+
 });
 
-tId = setInterval(draw_thing, 1000);
+tId = setInterval(draw_thing, 2000);
