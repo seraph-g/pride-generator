@@ -10,12 +10,12 @@ body {
 }
 
 html {
-    overflow: hidden;
+    overflow: auto;
 }
 
 main {
     overflow: hidden;
-    height: 100.01vh;
+    height: 100.1vh;
     display: grid;
     grid-template: repeat(3, 1fr) / auto;
 }
