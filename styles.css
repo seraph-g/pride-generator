@@ -106,7 +106,7 @@ form > div:hover {
 
 #active form > div {
     grid-template: 'text text img img button' 1fr /
-        10% 30% minmax(0px, 100px) 1fr minmax(30px, 10%);
+        10% 30% minmax(0px, 100px) minmax(30px, 1fr) minmax(30px, 10%);
 }
 
 #library form img {
