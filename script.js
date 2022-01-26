@@ -80,7 +80,9 @@ function moveUp(value) {
 
 function addToList(item) {
 
-    element = `<div id='a${index}'><div><button class="up_button" type="button">⇧</button><button class="down_button" type="button">⇩</button></div>`
+    element = `<div id='a${index}'><div>`
+        + `<button class="up_button" type="button"><i class="fas fa-arrow-up"></i></button>`
+        + `<button class="down_button" type="button"><i class="fas fa-arrow-down"></i></button></div>`
         + `<p>${item}</p><img src='flags/${flagList[item]}'>`
         + `<input id='${item}Name' name='${item}' value='flags/${flagList[item]}'></input>`
         + `<select id='${item}Mode' class='mode ${item}' name='${item}Mode'>`
@@ -96,7 +98,7 @@ function addToList(item) {
                 `${toTitleCase(modeList[mode].replace('_', ' '))}</option>`;
         }
     element += "</select>";
-    element += `<button type="button" id='${item}Off' class='remove_button ${item}' name='${item}On'>-</button>`;
+    element += `<button type="button" id='${item}Off' class='remove_button ${item}' name='${item}On'><i class="fas fa-minus"></i></button>`;
     element += "</div>"
 
     $("#active form").append(element);
@@ -151,9 +153,9 @@ function onUpdate() {
 $(function() {
 
     for (var item in flagList) {
-        element = `<div><p>${item}</p><img src='flags/${flagList[item]}'>`
+        element = `<div class='${item}'><p>${item}</p><img src='flags/${flagList[item]}'>`
             + `<input id='${item}Name' name='${item}' value='flags/${flagList[item]}'></input>`
-            + `<button type="button" id='${item}On' class='mode ${item}' name='${item}'>+</button>`;
+            + `<button type="button" id='${item}On' class='mode ${item}' name='${item}'><i class="fas fa-plus"></i></button>`;
         // for (var mode in modeList) {
         //     element += `<option value='${modeList[mode]}'>` +
         //         `${toTitleCase(modeList[mode].replace('_', ' '))}</option>`;
@@ -171,9 +173,10 @@ $(function() {
         $("#library form").append(element);
     }
 
-    $.each($("#library form button"), function(index, value) {
+    $.each($("#library form > div"), function(index, value) {
         value.addEventListener("click", function () {
-            addToList(value.name);
+            console.log($(value).attr('class'));
+            addToList($(value).attr('class'));
         });
     });
 

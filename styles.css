@@ -29,7 +29,7 @@ main > div {
     align-items: center;
     height: 100%;
     width: 100%;
-    border: 2px solid lavender;
+    border: 2px solid pink;
     border-radius: 10px;
     overflow: hidden;
     flex-direction: column;
@@ -88,8 +88,6 @@ form > div {
     height: auto;
     overflow: visible;
     display: grid;
-    grid-template: 'text text img img . button' 1fr /
-        10% 35% minmax(0px, 100px) 0.95fr 5px minmax(20px, 10%);
 }
 
 form > div:nth-child(2n+1) {
@@ -98,6 +96,17 @@ form > div:nth-child(2n+1) {
 
 form > div:hover {
     background: #e9eeee;
+}
+
+#library form > div {
+    cursor: pointer;
+    grid-template: 'text img button' 1fr /
+        45% 1fr minmax(30px, 10%);
+}
+
+#active form > div {
+    grid-template: 'text text img img button' 1fr /
+        10% 30% minmax(0px, 100px) 1fr minmax(30px, 10%);
 }
 
 #library form img {
@@ -163,6 +172,42 @@ h2 {
     align-items: center;
 }
 
+button {
+    border: 0px;
+    border-radius: 0px 5px 5px 0px;
+    background: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background: white;
+}
+
+.up_button {
+    border-radius: 5px 0px 0px 0px;
+}
+
+.down_button {
+    border-radius: 0px 0px 0px 5px;
+}
+
+select {
+    border-radius: 0px;
+    border: none;
+    background: none;
+    text-align: center;
+}
+
+select:hover {
+    background: white;
+    cursor: pointer;
+}
+
+form > div:first-child select:hover {
+    cursor: default;
+    background: none;
+}
+
 @media screen and ((min-width: 600px) ) {
     main {
         grid-template: 'display library' 1fr
@@ -177,7 +222,7 @@ h2 {
     }
 
     main > div {
-        border-radius: 0px;
+        border-radius: 10px !important;
     }
 
     h2 {
