@@ -17,6 +17,8 @@ const flagList = {
     "Aromantic": "aromantic.png",
     "Trixic": "trixic.png",
     "Toric": "toric.png",
+    "Demiboy": "demiboy.png",
+    "Demigirl": "demigirl.png",
 };
 var index = 0;
 
