@@ -11,6 +11,7 @@ const flagList = {
     "Pan": "pan.png",
     "Nonbinary": "nonbinary.png",
     "Genderfluid": "genderfluid.png",
+    "Original": "original.png",
     "8 Stripe": "8stripe.png",
     "Agender": "agender.png",
     "Asexual": "asexual.png",

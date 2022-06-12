@@ -3,7 +3,7 @@
 "flags/genderfluid.png", "flags/8stripe.png", "flags/agender.png",
 "flags/asexual.png", "flags/aromantic.png",
 "flags/trixic.png", "flags/toric.png", "flags/lesbian2.png",
-"flags/mlm.png", "flags/mlm2.png",
+"flags/mlm.png", "flags/mlm2.png", "flags/original.png",
 "flags/demiboy.png", "flags/demigirl.png"; */
 
 
