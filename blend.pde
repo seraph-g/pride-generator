@@ -1,6 +1,6 @@
 /* @pjs preload="flags/bi.png, flags/trans.png", "flags/genderqueer.png",
 "flags/lesbian.png", "flags/pan.png", "flags/gay.png", "flags/nonbinary.png",
-"flags/genderfluid.png", "flags/8stripe.png", "flags/agender.png",
+"flags/genderfluid.png", "flags/philly.png", "flags/agender.png",
 "flags/asexual.png", "flags/aromantic.png",
 "flags/trixic.png", "flags/toric.png", "flags/lesbian2.png",
 "flags/mlm.png", "flags/mlm2.png", "flags/original.png",
