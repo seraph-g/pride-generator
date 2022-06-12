@@ -1,9 +1,9 @@
 const modeList = ["BASE", "ADD", "SUBTRACT", "DARKEST", "LIGHTEST", "DIFFERENCE", "EXCLUSION", "MULTIPLY", "SCREEN", "OVERLAY", "HARD_LIGHT", "SOFT_LIGHT", "DODGE", "BURN"];
 const flagList = {
-    "Lesbian": "lesbian.png",
-    "Lesbian 2": "lesbian2.png",
-    "MLM": "mlm.png",
-    "MLM 2": "mlm2.png",
+    "Lesbian (5)": "lesbian.png",
+    "Lesbian (7)": "lesbian2.png",
+    "MLM (5)": "mlm.png",
+    "MLM (7)": "mlm2.png",
     "Gay": "gay.png",
     "Bi": "bi.png",
     "Trans": "trans.png",
